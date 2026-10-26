@@ -1,0 +1,62 @@
+
+const mainHeader = document.getElementById("main-header");
+const navLinks = document.querySelectorAll(".nav-link");
+const navList = document.querySelector(".nav-list");
+const article = document.querySelector("article");
+const paragraphs = document.querySelectorAll(".content");
+const emailInput = document.querySelector("#contact-form #email");
+const form = document.getElementById("contact-form");
+
+console.log("9.1 selected:", mainHeader, navLinks, article, paragraphs, emailInput);
+
+const articleTitle = document.querySelector("article h2");
+if (articleTitle) {
+  articleTitle.textContent = "Updated Article Title";
+}
+
+mainHeader.classList.add("highlight");
+navLinks[0].classList.add("accent");
+
+console.log(article.dataset.id); // 42
+console.log(article.dataset.category); // tech
+article.setAttribute("data-status", "published");
+
+document.getElementById("name").placeholder = "e.g. Amina";
+emailInput.placeholder = "name@gmail.com";
+
+const unsafeDiv = document.getElementById("unsafe");
+const safeDiv = document.getElementById("safe");
+
+const userInput = "<img src=x onerror=alert('hacked')>";
+
+safeDiv.textContent = userInput;
+
+const newParagraph = document.createElement("p");
+newParagraph.textContent = "This paragraph was created with JavaScript - safe!";
+newParagraph.classList.add("content");
+article.append(newParagraph);
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault(); 
+
+  const nameValue = document.getElementById("name").value.trim();
+  const emailValue = emailInput.value.trim();
+
+  
+  if (nameValue === "") {
+    alert("Please enter your name");
+    return;
+  }
+
+  if (emailValue === "" || !emailValue.includes("@")) {
+    alert("Please enter a valid email");
+    return;
+  }
+
+  console.log("Form submitted:", { name: nameValue, email: emailValue });
+  alert(`Thanks ${nameValue}! Form submitted successfully.`);
+
+  form.reset();
+});
+
+console.log("✓ All DOM tasks loaded - form should now work without reloading");
